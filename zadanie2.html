@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задание 2. Собери цель по SMART — «Хочу окончить школу»</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f172a; color: #e2e8f0;
+    margin: 0; padding: 24px; line-height: 1.5;
+  }
+  .card {
+    background: #1e293b; border: 1px solid #334155;
+    border-radius: 16px; padding: 24px;
+    max-width: 860px; margin: 0 auto;
+  }
+  h1 { color: #38bdf8; font-size: 1.4rem; margin-top: 0; }
+  .hint { color: #94a3b8; font-size: 0.92rem; margin-top: -6px; }
+  .situation {
+    background: #0f172a; border-left: 4px solid #facc15;
+    border-radius: 8px; padding: 14px 16px; margin: 16px 0;
+  }
+  .situation b { color: #facc15; }
+  .sm-group { margin: 14px 0; }
+  .sm-group label {
+    display: block; font-weight: 600; color: #7dd3fc; margin-bottom: 4px;
+  }
+  .sm-group input[type=text] {
+    width: 100%; padding: 10px 12px; border-radius: 8px;
+    border: 1px solid #334155; background: #0f172a;
+    color: #e2e8f0; font-family: inherit; font-size: 0.95rem;
+  }
+  .sm-group input[type=text]:focus { outline: 2px solid #38bdf8; }
+  .sm-group small { color: #64748b; font-size: 0.82rem; }
+  .sm-group.ok input { border-color: #22c55e; }
+  .sm-group.no input { border-color: #ef4444; }
+  .mark { font-size: 0.85rem; margin-left: 6px; }
+  .mark.ok { color: #4ade80; }
+  .mark.no { color: #f87171; }
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  button.main {
+    font-family: inherit; font-size: 1rem; padding: 10px 22px;
+    border: none; border-radius: 10px; background: #38bdf8;
+    color: #0f172a; font-weight: 700; cursor: pointer;
+  }
+  button.main:hover { background: #7dd3fc; }
+  button.sec { background: #334155; color: #e2e8f0; }
+  button.sec:hover { background: #475569; }
+  .result {
+    margin-top: 14px; padding: 14px; border-radius: 10px;
+    font-weight: 600; display: none; white-space: pre-line;
+  }
+  .result.show { display: block; }
+  .result.good { background: #052e16; color: #4ade80; border: 1px solid #22c55e; }
+  .result.bad { background: #450a0a; color: #fca5a5; border: 1px solid #ef4444; }
+  .example {
+    margin-top: 14px; padding: 12px 16px; border-radius: 10px;
+    background: #0f172a; border: 1px dashed #38bdf8;
+    font-size: 0.92rem; display: none;
+  }
+  .example.show { display: block; }
+  .example b { color: #7dd3fc; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🎓 Задание 2. Собери цель по SMART</h1>
+  <p class="hint">Заполни каждый критерий так, чтобы получилась корректная цель.</p>
+
+  <div class="situation">
+    Ситуация: <b>«Хочу окончить школу.»</b><br>
+    Преврати это желание в цель по SMART.
+  </div>
+
+  <div class="sm-group" id="g-s">
+    <label>S — Specific (что конкретно делаю?) <span class="mark" id="m-s"></span></label>
+    <input type="text" id="s" placeholder="Например: окончить 9 класс без троек, сдать ОГЭ по 4 предметам">
+    <small>Подсказка: должно быть понятно ЧТО именно, а не «окончить школу вообще».</small>
+  </div>
+
+  <div class="sm-group" id="g-m">
+    <label>M — Measurable (как измерю?) <span class="mark" id="m-m"></span></label>
+    <input type="text" id="m" placeholder="Например: все оценки 4 и 5, ОГЭ сдать не ниже 4 по каждому предмету">
+    <small>Подсказка: нужны цифры или проверяемый критерий (оценки, баллы, экзамены).</small>
+  </div>
+
+  <div class="sm-group" id="g-a">
+    <label>A — Achievable (почему это реально?) <span class="mark" id="m-a"></span></label>
+    <input type="text" id="a" placeholder="Например: заниматься 1 час в день, раз в неделю разбирать сложные темы с учителем">
+    <small>Подсказка: ресурс, время, силы — это выполнимо?</small>
+  </div>
+
+  <div class="sm-group" id="g-r">
+    <label>R — Relevant (зачем это мне?) <span class="mark" id="m-r"></span></label>
+    <input type="text" id="r" placeholder="Например: чтобы поступить в 10 класс / колледж на нужное направление">
+    <small>Подсказка: как цель связана с учёбой / планами / профессией?</small>
+  </div>
+
+  <div class="sm-group" id="g-t">
+    <label>T — Time-bound (к какому сроку?) <span class="mark" id="m-t"></span></label>
+    <input type="text" id="t" placeholder="Например: до 25 июня (к концу учебного года)">
+    <small>Подсказка: конкретная дата, а не «когда-нибудь».</small>
+  </div>
+
+  <div class="btn-row">
+    <button class="main" id="check2">Проверить цель</button>
+    <button class="main sec" id="reset2">Сбросить</button>
+    <button class="main sec" id="showEx">Показать пример</button>
+  </div>
+
+  <div class="result" id="result2"></div>
+
+  <div class="example" id="example">
+    <b>Эталонный пример цели по SMART:</b><br>
+    «Я до 25 июня (T) окончу 9 класс без троек — все итоговые оценки 4 и 5 (S, M), сдав ОГЭ по 4 предметам не ниже 4 (M), занимаясь по 1 часу в день и раз в неделю разбирая сложные темы с учителем (A), чтобы поступить в 10 класс на нужное мне направление (R).»
+  </div>
+</div>
+
+<script>
+function checkField(id, minLen, needDigit) {
+  const val = document.getElementById(id).value.trim();
+  if (val.length < minLen) return false;
+  if (needDigit && !/\d/.test(val)) return false;
+  return true;
+}
+
+function setMark(id, ok, show) {
+  const g = document.getElementById('g-' + id);
+  const m = document.getElementById('m-' + id);
+  g.classList.remove('ok', 'no');
+  m.classList.remove('ok', 'no');
+  m.textContent = '';
+  if (!show) return;
+  if (ok) {
+    g.classList.add('ok');
+    m.textContent = '✓';
+    m.classList.add('ok');
+  } else {
+    g.classList.add('no');
+    m.textContent = '✗';
+    m.classList.add('no');
+  }
+}
+
+document.getElementById('check2').addEventListener('click', () => {
+  const res = document.getElementById('result2');
+  const s = checkField('s', 10, false);
+  const m = checkField('m', 5, true);
+  const a = checkField('a', 10, false);
+  const r = checkField('r', 10, false);
+  const t = checkField('t', 4, false);
+  const flags = { s, m, a, r, t };
+  const names = {
+    s: 'S — Specific', m: 'M — Measurable', a: 'A — Achievable',
+    r: 'R — Relevant', t: 'T — Time-bound'
+  };
+
+  Object.keys(flags).forEach(k => setMark(k, flags[k], true));
+
+  const missing = Object.keys(flags).filter(k => !flags[k]).map(k => names[k]);
+
+  res.classList.add('show');
+  if (missing.length === 0) {
+    res.className = 'result show good';
+    res.innerHTML = '🎉 Отлично! Все пять критериев заполнены — цель оформлена по SMART.\nПроверь: есть ли в твоей цели конкретика, цифры, реалистичность, смысл и дата?';
+  } else {
+    res.className = 'result show bad';
+    let msg = '⚠️ Не хватает или слабо заполнено: ' + missing.join(', ') + '.';
+    if (!m) msg += '\nПодсказка по M: добавь цифры — какие оценки, сколько экзаменов, какой балл считается успехом.';
+    if (!t) msg += '\nПодсказка по T: укажи конкретную дату, например «до 25 июня».';
+    res.innerHTML = msg;
+  }
+});
+
+document.getElementById('reset2').addEventListener('click', () => {
+  ['s','m','a','r','t'].forEach(id => {
+    document.getElementById(id).value = '';
+    setMark(id, false, false);
+  });
+  const res = document.getElementById('result2');
+  res.className = 'result';
+  res.innerHTML = '';
+  document.getElementById('example').classList.remove('show');
+});
+
+document.getElementById('showEx').addEventListener('click', () => {
+  document.getElementById('example').classList.toggle('show');
+});
+</script>
+</body>
+</html>
